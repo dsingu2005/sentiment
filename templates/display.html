@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Images and Results</title>
+</head>
+<body>
+    {% for url in urls %}
+        {% if url.endswith('.png') %}
+            <img src="{{ url }}" alt="Image">
+        {% endif %}
+    {% endfor %}
+
+    <h2>Compiled Results:</h2>
+    <ul>
+        {% for url in urls %}
+            {% if url.endswith('.xlsx') %}
+                <li><a href="{{ url }}" target="_blank">{{ url.split('/')[-1] }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
