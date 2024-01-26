@@ -15,10 +15,12 @@ from google.cloud import datastore
 from google.cloud import storage
 import shutil
 
-nltk.download('vader_lexicon')
+# nltk.download('vader_lexicon')
 
-model = AutoModelForSequenceClassification.from_pretrained('ProsusAI/finBERT')
-tokenizer = AutoTokenizer.from_pretrained('ProsusAI/finBERT')
+# model = AutoModelForSequenceClassification.from_pretrained('ProsusAI/finBERT')
+# tokenizer = AutoTokenizer.from_pretrained('ProsusAI/finBERT')
+model = AutoModelForSequenceClassification.from_pretrained('mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis')
+tokenizer = AutoTokenizer.from_pretrained('mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis')
 sia = SentimentIntensityAnalyzer()
 
 def split_text(text, chunk_size):
@@ -135,8 +137,8 @@ def analyze_sentiment(text):
     
 def process_file(filename):
 
-    keywords_df = pd.read_excel('12_20/keywords.xlsx')
-    xls = pd.ExcelFile(f'12_20/{filename}.xlsx')
+    keywords_df = pd.read_excel('sentiment/12_20/keywords.xlsx')
+    xls = pd.ExcelFile(f'sentiment/12_20/{filename}.xlsx')
 
     for sheet_name in xls.sheet_names:
         ads_df = pd.read_excel(xls, sheet_name=sheet_name)
@@ -249,5 +251,5 @@ def process_folder(folder_name):
             urls.append(url)
     return urls
 
-process_file('ADS GR')
-compile_results()
+# process_file('ADS GR')
+# compile_results()
